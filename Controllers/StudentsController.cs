@@ -21,6 +21,7 @@ namespace StudentAPI.Controllers
 
         // GET: api/<StudentsController>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Student>> GetAll()
         {
             return Ok(_repo.GetAll());
@@ -28,6 +29,9 @@ namespace StudentAPI.Controllers
 
         // GET api/<StudentsController>/5
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         public ActionResult<Student> GetById(int id)
         {
           var student = _repo.GetById(id);
@@ -39,6 +43,9 @@ namespace StudentAPI.Controllers
 
         // POST api/<StudentsController>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
         public ActionResult<Student> Post([FromBody] Student student)
         {
             if (student == null)
@@ -49,6 +56,9 @@ namespace StudentAPI.Controllers
 
         // PUT api/<StudentsController>/5
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         public ActionResult<Student> Put(int id, [FromBody] Student student)
         {
             var studentToUpdate = _repo.GetById(id);
@@ -62,6 +72,9 @@ namespace StudentAPI.Controllers
 
         // DELETE api/<StudentsController>/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         public ActionResult<Student> Delete(int id)
         {
             var studentToRemove = _repo.GetById(id);
