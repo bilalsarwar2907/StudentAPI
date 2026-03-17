@@ -9,7 +9,7 @@ namespace StudentAPI.Repositories
 
         public StudentRepositoryList(bool includeData = false)
         {
-            if (includeData)
+            if (!includeData)
             {
                 Add(new Student { Name = "Ali", YearOfBirth = 1970 });
                 Add(new Student { Name = "Bob", YearOfBirth = 1980 });

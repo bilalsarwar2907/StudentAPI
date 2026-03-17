@@ -1,7 +1,14 @@
+using StudentAPI.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+//DependencyInjection
+builder.Services.AddSingleton<IStudentRepositoryList, StudentRepositoryList>();
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
