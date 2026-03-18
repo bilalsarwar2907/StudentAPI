@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentAPI.Models;
 using StudentAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,6 +22,7 @@ namespace StudentAPI.Controllers
 
         // GET: api/<StudentsController>
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Student>> GetAll()
         {
@@ -29,6 +31,7 @@ namespace StudentAPI.Controllers
 
         // GET api/<StudentsController>/5
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
@@ -43,6 +46,7 @@ namespace StudentAPI.Controllers
 
         // POST api/<StudentsController>
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -57,6 +61,7 @@ namespace StudentAPI.Controllers
 
         // PUT api/<StudentsController>/5
         [HttpPut("{id}")]
+        [Authorize(Roles ="Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
@@ -74,6 +79,7 @@ namespace StudentAPI.Controllers
 
         // DELETE api/<StudentsController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
