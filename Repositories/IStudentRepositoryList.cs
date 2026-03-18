@@ -9,5 +9,7 @@ namespace StudentAPI.Repositories
         IEnumerable<Student> GetAll();
         Student? GetById(int? id);
         Student? Update(int? id, Student student);
+
+        IEnumerable<Student> GetAll(int? birthYearAfter, int? birthYearBefore, string? sortBy);
     }
 }

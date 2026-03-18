@@ -57,5 +57,33 @@ namespace StudentAPI.Repositories
             _students.Remove(studentToDelete);
             return studentToDelete;
         }
+
+        public IEnumerable<Student> GetAll(int? birthYearAfter, int? birthYearBefore, string? sortBy)
+        {
+            var result = _students.AsEnumerable();
+
+            //filtering
+            if (birthYearAfter .HasValue)
+                result = result.Where(s=>s.YearOfBirth >= birthYearAfter.Value);
+
+            if (birthYearBefore .HasValue)
+                result = result.Where(s=>s.YearOfBirth <= birthYearBefore.Value);
+
+            //Sorting
+            result = sortBy switch
+            {
+                "id" => result.OrderBy(s => s.Id),
+                "id desc" => result.OrderByDescending(s => s.Id),
+                "name desc" => result.OrderByDescending(s => s.Name),
+                "name" => result.OrderBy(s => s.Name),
+                "birthYear desc" => result.OrderByDescending(s => s.YearOfBirth),
+                "birthYear" => result.OrderBy(s => s.YearOfBirth),
+
+                _ => result
+
+
+            };
+            return result.ToList();
+        }
     }
 }

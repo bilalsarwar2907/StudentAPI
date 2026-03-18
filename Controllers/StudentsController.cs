@@ -83,5 +83,17 @@ namespace StudentAPI.Controllers
             _repo.Delete(id);
             return Ok(studentToRemove);
         }
+        // GET: api/students?birthYearAfter=2000&birthYearBefore=2005&sortBy=name
+        [HttpGet("filtering/sorting")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<Student>> GetAll(
+            [FromQuery] int? birthYearAfter,
+            [FromQuery] int? birthYearBefore,
+            [FromQuery] string? sortBy)
+        {
+            var students = _repo.GetAll(birthYearAfter, birthYearBefore, sortBy);
+            return Ok(students);
+        }
+
     }
 }
