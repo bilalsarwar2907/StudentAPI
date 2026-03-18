@@ -51,7 +51,8 @@ namespace StudentAPI.Controllers
             if (student == null)
                 return BadRequest();
             var added =_repo.Add(student);
-            return Ok(added);
+            //return Ok(added);
+            return CreatedAtAction(nameof(GetById), new { id = added.Id }, added);
         }
 
         // PUT api/<StudentsController>/5
@@ -67,6 +68,7 @@ namespace StudentAPI.Controllers
             studentToUpdate.Name = student.Name;
             studentToUpdate.YearOfBirth = student.YearOfBirth;
             return Ok(studentToUpdate);
+
 
         }
 
